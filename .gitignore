@@ -70,3 +70,6 @@ yarn-debug.log*
 !/storage/.keep
 
 /config/master.key
+
+# Ignore vscode settings
+.vscode
