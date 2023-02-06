@@ -1,9 +1,8 @@
 class BillersController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :set_biller, only: %i[ show update destroy ]
+  before_action :set_biller, only: %i[show update destroy]
 
   def index
-    @billers = Biller.all
+    @billers = Biller.ransack(params[:q]).result.page(params[:page]).per(params[:per])
   end
 
   def show; end
@@ -26,6 +25,8 @@ class BillersController < ApplicationController
     unless @biller.destroy
       return error(400, @biller.errors.full_messages.first)
     end
+
+    success(200, "Biller #{@biller.name} (#{@biller.code}) deleted successfully")
   end
 
   private
