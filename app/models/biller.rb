@@ -1,9 +1,14 @@
 class Biller < ApplicationRecord
   validates :code, :name, :url, presence: true
-  validates_uniqueness_of :code
+  validates_uniqueness_of :code, case_sensitive: false
 
-  def code=(value)
-    value = value.downcase if value.present?
-    super(value)
+  before_validation :normalize_data
+
+  private
+
+  def normalize_data
+    self.code = code.strip.downcase if code.present?
+    self.name = name.strip if name.present?
+    self.url = url.strip.downcase if url.present?
   end
 end
