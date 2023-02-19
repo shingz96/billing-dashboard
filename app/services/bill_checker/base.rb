@@ -5,16 +5,20 @@ module BillChecker
       define_bill_info_methods
     end
 
-    def generate_pdf
-      raise NotImplementedError
-    end
-
     def extract_bill_info
       raise NotImplementedError
     end
 
     def payment_url
       raise NotImplementedError
+    end
+
+    def generate_pdf
+      raise NotImplementedError
+    end
+
+    def pdf_url
+      Rails.application.routes.url_helpers.pdf_bill_url(@bill)
     end
 
     def bill_info_fields

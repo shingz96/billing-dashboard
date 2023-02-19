@@ -1,5 +1,5 @@
 class BillsController < ApplicationController
-  before_action :set_bill, only: %i[show update destroy]
+  before_action :set_bill, only: %i[show update destroy pdf]
 
   def index
     @bills = Bill.ransack(params[:q]).result.includes(:biller, :entity).page(params[:page]).per(params[:per])
@@ -27,6 +27,11 @@ class BillsController < ApplicationController
     end
 
     success(200, "Bill #{@bill.name} (#{@bill.biller.name}) deleted successfully")
+  end
+
+  def pdf
+    pdf_data = @bill.bill_checker.generate_pdf
+    send_data pdf_data.content, filename: pdf_data.filename, type: pdf_data.response['content-type'], disposition: "inline"
   end
 
   private

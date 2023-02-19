@@ -19,6 +19,9 @@ class Bill < ApplicationRecord
   def bill_info
     return unless bill_checker.present?
 
-    bill_checker.bill_info
+    {
+      payment_url: bill_checker.payment_url,
+      pdf_url: bill_checker.pdf_url
+    }.merge(bill_checker.bill_info)
   end
 end
