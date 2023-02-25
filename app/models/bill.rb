@@ -13,6 +13,8 @@ class Bill < ApplicationRecord
       case biller.code.downcase
       when 'mpkj'
         BillChecker::Mpkj.new(self)
+      when 'air_selangor'
+        BillChecker::AirSelangor.new(self)
       end
   end
 
