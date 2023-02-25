@@ -54,13 +54,13 @@ gem "brakeman"
 gem "bundler-audit"
 gem "rubocop-rails"
 
-gem 'nokogiri'
-gem 'mechanize'
 gem 'faraday'
 gem 'faraday-cookie_jar'
 gem 'faraday-follow_redirects'
-gem 'ransack'
 gem 'kaminari'
+gem 'mechanize'
+gem 'nokogiri'
+gem 'ransack'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
