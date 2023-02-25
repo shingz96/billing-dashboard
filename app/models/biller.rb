@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: billers
+#
+#  id         :bigint           not null, primary key
+#  code       :string
+#  name       :string
+#  url        :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_billers_on_code  (code) UNIQUE
+#
 class Biller < ApplicationRecord
   validates :code, :name, :url, presence: true
   validates_uniqueness_of :code, case_sensitive: false
