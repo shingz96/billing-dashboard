@@ -31,11 +31,7 @@ class BillsController < ApplicationController
 
   def pdf
     pdf_data = @bill.bill_checker.generate_pdf
-    if pdf_data.is_a?(String) && pdf_data.starts_with?("http")
-      redirect_to pdf_data, allow_other_host: true
-    else
-      send_data pdf_data.content, filename: pdf_data.filename, type: pdf_data.response['content-type'], disposition: "inline"
-    end
+    send_data pdf_data.content, filename: pdf_data.filename, type: pdf_data.response['content-type'], disposition: "inline"
   end
 
   private
